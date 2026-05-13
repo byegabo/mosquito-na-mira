@@ -1,0 +1,7 @@
+{
+  "name": "mosquito-na-mira",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
