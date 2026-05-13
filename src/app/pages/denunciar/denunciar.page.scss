@@ -1,0 +1,30 @@
+
+ion-item::part(native) {
+  border-bottom: none;
+}
+
+.image-preview {
+  margin-top: 20px;
+  text-align: center;
+
+  img {
+    border-radius: 12px;
+    max-height: 250px;
+    width: 100%;
+    object-fit: cover;   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+}
+
+// Espaçamento extra para os botões e avisos
+.ion-margin-top {
+  margin-top: 16px;
+}
+
+// Estiliza os textos de carregamento e sucesso do GPS
+ion-note {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+}

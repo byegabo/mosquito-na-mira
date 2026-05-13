@@ -1,0 +1,52 @@
+.grey-bg {
+  --background: #f4f4f4;
+}
+
+.main-hub-card {
+  margin: 10px 0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  height: 100px;
+
+  .card-main-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+  }
+}
+
+.sub-hub-card {
+  margin: 8px 0;
+  padding: 20px 10px;
+  text-align: center;
+  border-radius: 12px;
+  background: white;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+  ion-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+    color: #444;
+  }
+
+  ion-card-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-transform: none;
+  }
+}
+
+.transparent-item {
+  --background: transparent;
+  width: 100%;
+}

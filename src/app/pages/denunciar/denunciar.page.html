@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nova Denúncia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="denunciaForm" (ngSubmit)="enviarDenuncia()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Morada Aproximada *</ion-label>
+        <ion-input formControlName="endereco" placeholder="Ex: Rua João das Couves, 123"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ponto de Referência</ion-label>
+        <ion-textarea formControlName="descricao"></ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Denúncia Anónima</ion-label>
+        <ion-toggle formControlName="anonimo" color="danger"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-text-center ion-margin-top">
+      <ion-button expand="block" color="medium" (click)="tirarFoto()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Fotografar Foco *
+      </ion-button>
+    </div>
+
+    <div *ngIf="fotoFoco" class="ion-text-center ion-margin-top">
+      <img [src]="fotoFoco" style="border-radius: 10px; max-height: 200px;" />
+    </div>
+
+    <div class="ion-text-center ion-margin-top">
+      <ion-note *ngIf="carregandoLocalizacao" color="warning">Buscando GPS...</ion-note>
+      <ion-note *ngIf="coordenadas" color="success">📍 GPS Capturado!</ion-note>
+    </div>
+
+    <ion-button expand="block" color="danger" class="ion-margin-top" type="submit" [disabled]="!denunciaForm.valid || !fotoFoco || carregandoLocalizacao">
+      Enviar Denúncia
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center">Mosquito na Mira</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding grey-bg">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="main-hub-card" routerLink="/dashboard">
+          <ion-item lines="none" class="transparent-item">
+            <ion-icon name="bar-chart-outline" slot="start" size="large"></ion-icon>
+            <ion-label>
+              <h1 class="card-main-title">Dashboard da Dengue</h1>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="sub-hub-card" routerLink="/denunciar">
+          <ion-icon name="warning-outline"></ion-icon>
+          <ion-card-subtitle>Denunciar Foco</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="sub-hub-card" routerLink="/consultar-denuncia">
+          <ion-icon name="search-outline"></ion-icon>
+          <ion-card-subtitle>Consultar Denúncia</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="sub-hub-card" routerLink="/postos">
+          <ion-icon name="medkit-outline"></ion-icon>
+          <ion-card-subtitle>Postos de Saúde</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="sub-hub-card" routerLink="/mapa">
+          <ion-icon name="map-outline"></ion-icon>
+          <ion-card-subtitle>Mapa de Focos</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="sub-hub-card" routerLink="/noticias">
+          <ion-icon name="newspaper-outline"></ion-icon>
+          <ion-card-subtitle>Notícias</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="sub-hub-card" routerLink="/suporte">
+          <ion-icon name="help-circle-outline"></ion-icon>
+          <ion-card-subtitle>Suporte</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

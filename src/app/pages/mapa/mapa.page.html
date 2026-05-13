@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mapa de Focos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <google-map [center]="centroMapa" [zoom]="zoom" width="100%" height="100%">
+    <map-circle *ngFor="let foco of focosDenunciados"
+                [center]="foco.posicao"
+                [radius]="foco.raio"
+                [options]="{ fillColor: foco.cor, fillOpacity: 0.4, strokeColor: foco.cor, strokeOpacity: 0.8, strokeWeight: 2 }">
+    </map-circle>
+  </google-map>
+</ion-content>
