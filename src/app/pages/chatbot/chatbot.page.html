@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Triagem Virtual</ion-title>
+    <ion-icon name="robot" slot="end" class="ion-padding-end" size="large"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" style="--background: #f0f2f5;">
+  <div class="chat-container">
+    <div *ngFor="let msg of mensagens"
+        [ngClass]="msg.remetente === 'usuario' ? 'balao-usuario' : 'balao-bot'">
+        {{ msg.texto }}
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">
+        <ion-input [(ngModel)]="novaMensagem" placeholder="Digite seus sintomas..." (keyup.enter)="enviarMensagem()">          
+        </ion-input>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-button fill="clear" color="success" (click)="enviarMensagem()">
+          <ion-icon name="send" slot="end" class="ion-padding-end" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

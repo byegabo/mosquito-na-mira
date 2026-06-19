@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Suporte e Ajuda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-text-center ion-margin-bottom">
+    <h2>Como podemos ajudar?</h2>
+    <p>Consulte as dúvidas frequentes ou fale com um agente.</p>
+  </div>
+
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light"><ion-label>A denúncia é realmente anônima?</ion-label></ion-item>
+      <div class="ion-padding" slot="content">Sim, se marcar a opção "Anônimo", os seus dados não são enviados.</div>
+    </ion-accordion>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light"><ion-label>Qual o prazo para vistoria?</ion-label></ion-item>
+      <div class="ion-padding" slot="content">A equipe de agentes tenta verificar as denúncias em até 3 dias úteis.</div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <div class="ion-margin-top">
+    <ion-button expand="block" color="success" (click)="abrirWhatsApp()">
+      <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+      Falar com Agente (WhatsApp)
+    </ion-button>
+  </div>
+</ion-content>

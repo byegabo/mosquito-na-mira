@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Postos de Saúde</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>Encontre a Unidade Básica de Saúde (UBS) mais próxima de você em Palhoça.</p>
+
+  <ion-list>
+    <ion-card *ngFor="let posto of postos">
+      <ion-card-header>
+        <ion-card-title>{{ posto.nome }}</ion-card-title>
+        <ion-card-subtitle>{{ posto.endereco }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" fill="outline" color="primary" (click)="tracarRota(posto.endereco)">
+              <ion-icon name="map-outline" slot="start"></ion-icon>
+              Rota
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" fill="outline" color="success" (click)="ligar(posto.tel)">
+              <ion-icon name="call-outline" slot="start"></ion-icon>
+              Ligar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

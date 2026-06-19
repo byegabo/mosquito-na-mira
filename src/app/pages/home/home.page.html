@@ -35,7 +35,7 @@
       </ion-col>
 
       <ion-col size="6">
-        <ion-card class="sub-hub-card" routerLink="/postos">
+        <ion-card class="sub-hub-card" routerLink="/postos-saude">
           <ion-icon name="medkit-outline"></ion-icon>
           <ion-card-subtitle>Postos de Saúde</ion-card-subtitle>
         </ion-card>
@@ -59,6 +59,17 @@
         <ion-card class="sub-hub-card" routerLink="/suporte">
           <ion-icon name="help-circle-outline"></ion-icon>
           <ion-card-subtitle>Suporte</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-card class="main-hub-card" routerLink="/chatbot">
+          <ion-item lines="none" class="transparent-item">
+            <ion-icon name="robot" slot="start" size="large"></ion-icon>
+            <ion-label>
+              <h1 class="card-main-title">Triagem de Sintomas (Chatbot)</h1>
+            </ion-label>
+          </ion-item>
         </ion-card>
       </ion-col>
     </ion-row>

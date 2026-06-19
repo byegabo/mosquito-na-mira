@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Consultar Protocolo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>Acompanhe o status da sua denúncia utilizando o número de protocolo gerado.</p>
+  
+  <ion-item class="ion-margin-bottom">
+    <ion-input label="Nº do Protocolo" labelPlacement="floating" placeholder="Ex: 123456" [(ngModel)]="protocolo"></ion-input>
+  </ion-item>
+  
+  <ion-button expand="block" color="primary" (click)="consultar()">Pesquisar</ion-button>
+
+  <ion-card *ngIf="resultado" class="ion-margin-top">
+    <ion-card-header>
+      <ion-card-subtitle>Protocolo: {{ resultado.protocolo }}</ion-card-subtitle>
+      <ion-card-title color="warning">{{ resultado.status }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Data:</strong> {{ resultado.data }}</p>
+      <p><strong>Local:</strong> {{ resultado.endereco }}</p>
+      <p class="ion-margin-top">Uma equipe de agentes de saúde fará a vistoria no local em breve.</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
