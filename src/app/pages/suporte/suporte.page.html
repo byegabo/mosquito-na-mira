@@ -1,31 +1,73 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="medium">
-    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Suporte e Ajuda</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="ion-text-center ion-margin-bottom">
+<ion-content class="ion-padding custom-bg">
+  
+  <div class="hero-section ion-text-center">
+    <div class="icon-circle">
+      <ion-icon name="help-buoy" color="medium"></ion-icon>
+    </div>
     <h2>Como podemos ajudar?</h2>
-    <p>Consulte as dúvidas frequentes ou fale com um agente.</p>
+    <p>Encontre respostas rápidas ou fale connosco.</p>
   </div>
 
-  <ion-accordion-group>
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light"><ion-label>A denúncia é realmente anônima?</ion-label></ion-item>
-      <div class="ion-padding" slot="content">Sim, se marcar a opção "Anônimo", os seus dados não são enviados.</div>
+  <div class="section-title">
+    <h3>Dúvidas Frequentes</h3>
+  </div>
+
+  <ion-accordion-group class="custom-accordion">
+    
+    <ion-accordion value="first" class="faq-item">
+      <ion-item slot="header" class="faq-header" lines="none">
+        <ion-label class="ion-text-wrap"><b>Como faço uma denúncia anónima?</b></ion-label>
+      </ion-item>
+      <div class="ion-padding faq-content" slot="content">
+        Para fazer uma denúncia, vá até ao ecrã inicial, clique em "Nova Denúncia" e preencha os dados. O seu nome será mantido em sigilo pelas autoridades de saúde.
+      </div>
     </ion-accordion>
-    <ion-accordion value="second">
-      <ion-item slot="header" color="light"><ion-label>Qual o prazo para vistoria?</ion-label></ion-item>
-      <div class="ion-padding" slot="content">A equipe de agentes tenta verificar as denúncias em até 3 dias úteis.</div>
+
+    <ion-accordion value="second" class="faq-item">
+      <ion-item slot="header" class="faq-header" lines="none">
+        <ion-label class="ion-text-wrap"><b>O aplicativo funciona sem internet?</b></ion-label>
+      </ion-item>
+      <div class="ion-padding faq-content" slot="content">
+        No momento, é necessário estar ligado à internet para enviar a foto e a localização GPS do foco do mosquito para a nossa base de dados.
+      </div>
     </ion-accordion>
+
+    <ion-accordion value="third" class="faq-item">
+      <ion-item slot="header" class="faq-header" lines="none">
+        <ion-label class="ion-text-wrap"><b>A triagem por IA substitui um médico?</b></ion-label>
+      </ion-item>
+      <div class="ion-padding faq-content" slot="content">
+        Não. O nosso Chatbot serve apenas para orientação inicial. Se apresentar sintomas graves (como dor intensa na barriga ou sangramentos), procure imediatamente um Posto de Saúde.
+      </div>
+    </ion-accordion>
+
   </ion-accordion-group>
 
-  <div class="ion-margin-top">
-    <ion-button expand="block" color="success" (click)="abrirWhatsApp()">
-      <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
-      Falar com Agente (WhatsApp)
-    </ion-button>
+  <div class="section-title ion-margin-top">
+    <h3>Precisa de contacto direto?</h3>
   </div>
+
+  <ion-card class="contact-card">
+    <ion-card-content>
+      <ion-button expand="block" color="success" class="custom-btn" (click)="abrirWhatsApp()">
+        <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+        Falar no WhatsApp
+      </ion-button>
+
+      <ion-button expand="block" color="primary" fill="outline" class="custom-btn" (click)="enviarEmail()">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        Enviar um E-mail
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

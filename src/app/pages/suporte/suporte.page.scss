@@ -1,0 +1,92 @@
+.custom-bg {
+  --background: #121212;
+}
+
+
+.hero-section {
+  padding: 20px 0 30px 0;
+  
+  h2 {
+    font-weight: 700;
+    margin-top: 15px;
+    font-size: 1.5rem;
+    color: #ffffff;
+  }
+  
+  p {
+    color: #aaaaaa; 
+    font-size: 0.95rem;
+  }
+
+  .icon-circle {
+    background: #2a2a2a;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    
+    ion-icon {
+      font-size: 40px;
+      color: #ffffff;
+    }
+  }
+}
+
+.section-title {
+  margin-bottom: 15px;
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-left: 5px;
+    border-left: 4px solid var(--ion-color-primary, #3880ff);
+    padding-left: 10px;
+    color: #ffffff; 
+  }
+}
+
+.custom-accordion {
+  .faq-item {
+    margin-bottom: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #2a2a2a;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+    .faq-header {
+      --background: #2a2a2a;
+      --color: #ffffff;
+      font-size: 0.95rem;
+    }
+
+    .faq-content {
+      background: #1e1e1e;
+      color: #e0e0e0; 
+      font-size: 0.9rem;
+      line-height: 1.6;
+      border-top: 1px solid #3a3a3a;
+    }
+  }
+}
+
+.contact-card {
+  margin: 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  background: #2a2a2a;
+
+  .custom-btn {
+    height: 50px;
+    margin-bottom: 10px;
+    --border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  
+  .custom-btn:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -17,3 +17,13 @@ model Denuncia {
   fotoUrl       String?  
   dataCriacao   DateTime @default(now())
 }
+
+model PostoSaude {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  endereco  String
+  horario   String
+  telefone  String
+  tipo      String
+  cor       String
+}

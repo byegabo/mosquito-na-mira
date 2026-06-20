@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { addIcons } from 'ionicons';
+import { medical, location, time, call, navigate } from 'ionicons/icons';
 
 @Component({
   selector: 'app-postos-saude',
@@ -10,14 +13,26 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule, CommonModule]
 })
 export class PostosSaudePage {
-  postos = [
-    { nome: 'UBS Centro', endereco: 'R. Ver. Osvaldo de Oliveira, Centro', tel: '3220-0300' },
-    { nome: 'UBS Ponte do Imaruim', endereco: 'R. Antônio Vieira, Ponte do Imaruim', tel: '3220-0301' },
-    { nome: 'UBS Bela Vista', endereco: 'R. José Cosme Pamplona, Bela Vista', tel: '3220-0302' }
-  ];
+  
+  postos: any[] = [];
+
+  constructor(private http: HttpClient) {
+    addIcons({ medical, location, time, call, navigate });
+  }
+
+  ionViewWillEnter() {
+    this.http.get<any[]>('http://localhost:3000/postos-saude').subscribe({
+      next: (dadosDoBanco) => {
+        this.postos = dadosDoBanco;
+      },
+      error: (e) => console.error('Erro ao buscar postos', e)
+    });
+  }
 
   tracarRota(endereco: string) {
-    window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco + ', Palhoça - SC')}`, '_blank');
+    const enderecoFormatado = encodeURIComponent(endereco);
+    const linkMaps = `https://www.google.com/maps/search/?api=1&query=${enderecoFormatado}`;
+    window.open(linkMaps, '_system');
   }
 
   ligar(telefone: string) {
