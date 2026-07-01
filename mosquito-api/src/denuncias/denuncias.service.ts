@@ -52,21 +52,30 @@ export class DenunciasService {
   
   async obterEstatisticasDashboard() {
     try {
-      const total = await this.prisma.denuncia.count();
-      
-      const ativos = await this.prisma.denuncia.count({
-        where: { status: { in: ['Em Análise', 'Homologado', 'Em andamento'] } }
+      const grupos = await this.prisma.denuncia.groupBy({
+        by: ['status'],
+        _count: { status: true }
       });
 
-      const eliminados = await this.prisma.denuncia.count({
-        where: { status: 'Concluído' }
+      const estatisticas = {
+        emAnalise: 0,
+        emAndamento: 0,
+        resolvido: 0,
+        falsoAlarme: 0
+      };
+
+      grupos.forEach(grupo => {
+        if (grupo.status === 'Em Análise') estatisticas.emAnalise = grupo._count.status;
+        if (grupo.status === 'Em Andamento') estatisticas.emAndamento = grupo._count.status;
+        if (grupo.status === 'Resolvido') estatisticas.resolvido = grupo._count.status;
+        if (grupo.status === 'Falso Alarme') estatisticas.falsoAlarme = grupo._count.status;
       });
 
-      return { total: total || 0, ativos: ativos || 0, eliminados: eliminados || 0 };
+      return estatisticas;
 
     } catch (error) {
-      console.error('Erro no Prisma:', error);
-      return { total: 0, ativos: 0, eliminados: 0 };
+      console.error('Erro no Prisma ao buscar estatísticas:', error);
+      return { emAnalise: 0, emAndamento: 0, resolvido: 0, falsoAlarme: 0 };
     }
   }
 

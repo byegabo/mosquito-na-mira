@@ -1,114 +1,81 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
     <ion-title>Dados Epidemiológicos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="dashboard-bg">
+  <div class="header-resumo">
+    <h2>Panorama Geral</h2>
+    <p>Acompanhamento em tempo real dos focos registrados.</p>
+  </div>
 
   <div class="filtros-container">
-    <h2 class="titulo-filtros">Filtros</h2>
+    <h3 class="titulo-filtros">Filtrar Dados</h3>
+    <ion-row>
+      <ion-col size="6">
+        <div class="filtro-item">
+          <label>Estado (UF)</label>
+          <ion-select [(ngModel)]="filtros.uf" (ionChange)="atualizarMunicipios()" interface="popover">
+            <ion-select-option value="SC">Santa Catarina</ion-select-option>
+            <ion-select-option value="PR">Paraná</ion-select-option>
+            <ion-select-option value="RS">Rio Grande do Sul</ion-select-option>
+          </ion-select>
+        </div>
+      </ion-col>
 
-    <ion-grid class="ion-no-padding">
-      
-      <ion-row>
-        <ion-col size="4">
-          <div class="filtro-item">
-            <label>Região</label>
-            <ion-select interface="popover" [(ngModel)]="filtros.regiao" (ionChange)="aplicarFiltros()">
-              <ion-select-option value="Sul">Sul</ion-select-option>
-              <ion-select-option value="Sudeste">Sudeste</ion-select-option>
-              <ion-select-option value="Norte">Norte</ion-select-option>
-              <ion-select-option value="Nordeste">Nordeste</ion-select-option>
-              <ion-select-option value="Centro-Oeste">Centro-Oeste</ion-select-option>
-            </ion-select>
-          </div>
-        </ion-col>
+      <ion-col size="6">
+        <div class="filtro-item">
+          <label>Município</label>
+          <ion-select [(ngModel)]="filtros.municipio" (ionChange)="aplicarFiltros()" interface="popover">
+            <ion-select-option *ngFor="let cidade of municipiosDisponiveis" [value]="cidade">
+              {{ cidade }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-grid class="ion-padding-horizontal">
+    <ion-row>
+      <ion-col size="6">
+        <div class="status-card card-analise">
+          <div class="card-icon"><ion-icon name="search-outline"></ion-icon></div>
+          <h3>{{ estatisticas.emAnalise }}</h3>
+          <p>Em Análise</p>
+        </div>
+      </ion-col>
 
-        <ion-col size="3">
-          <div class="filtro-item">
-            <label>UF</label>
-            <ion-select interface="popover" [(ngModel)]="filtros.uf" (ionChange)="atualizarMunicipios()">
-              <ion-select-option value="SC">SC</ion-select-option>
-              <ion-select-option value="PR">PR</ion-select-option>
-              <ion-select-option value="RS">RS</ion-select-option>
-            </ion-select>
-          </div>
-        </ion-col>
+      <ion-col size="6">
+        <div class="status-card card-andamento">
+          <div class="card-icon"><ion-icon name="sync-outline"></ion-icon></div>
+          <h3>{{ estatisticas.emAndamento }}</h3>
+          <p>Em Andamento</p>
+        </div>
+      </ion-col>
 
-        <ion-col size="5">
-          <div class="filtro-item">
-            <label>Município</label>
-            <ion-select interface="popover" [(ngModel)]="filtros.municipio" (ionChange)="aplicarFiltros()">
-              <ion-select-option *ngFor="let cidade of municipiosDisponiveis" [value]="cidade">
-                {{ cidade }}
-              </ion-select-option>
-            </ion-select>
-          </div>
-        </ion-col>
-      </ion-row>
+      <ion-col size="6">
+        <div class="status-card card-resolvido">
+          <div class="card-icon"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
+          <h3>{{ estatisticas.resolvido }}</h3>
+          <p>Resolvidos</p>
+        </div>
+      </ion-col>
 
-      <ion-row class="mt-linha">
-        <ion-col size="4">
-          <div class="filtro-item">
-            <label>Ano</label>
-            <ion-select interface="popover" [(ngModel)]="filtros.ano" (ionChange)="aplicarFiltros()">
-              <ion-select-option value="2024">2024</ion-select-option>
-              <ion-select-option value="2025">2025</ion-select-option>
-              <ion-select-option value="2026">2026</ion-select-option>
-            </ion-select>
-          </div>
-        </ion-col>
+      <ion-col size="6">
+        <div class="status-card card-falso">
+          <div class="card-icon"><ion-icon name="close-circle-outline"></ion-icon></div>
+          <h3>{{ estatisticas.falsoAlarme }}</h3>
+          <p>Falso Alarme</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-        <ion-col size="8">
-          <div class="filtro-item">
-            <label>Casos confirmados</label>
-            <ion-select interface="popover" [(ngModel)]="filtros.casos" (ionChange)="aplicarFiltros()">
-              <ion-select-option value="Sim">Sim</ion-select-option>
-              <ion-select-option value="Não">Não</ion-select-option>
-              <ion-select-option value="Todos">Todos</ion-select-option>
-            </ion-select>
-          </div>
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
+  <div class="grafico-container">
+    <h3 class="grafico-titulo">Distribuição de Status</h3>
+    <canvas id="graficoStatus"></canvas>
   </div>
 
-  <div class="dashboard-container">
-    
-    <ion-card class="stat-card main-stat">
-      <div class="icon-box danger-box">
-        <ion-icon name="alert-circle"></ion-icon>
-      </div>
-      <div class="stat-info">
-        <h2 *ngIf="carregando">...</h2>
-        <h2 *ngIf="!carregando">{{ casosConfirmados }}</h2>
-        <p>Total de Denúncias</p>
-      </div>
-    </ion-card>
-
-    <div class="stats-grid">
-      <ion-card class="stat-card">
-        <div class="icon-box warning-box">
-          <ion-icon name="warning"></ion-icon>
-        </div>
-        <h2 *ngIf="carregando">...</h2>
-        <h2 *ngIf="!carregando">{{ focosAtivos }}</h2>
-        <p>Focos Ativos</p>
-      </ion-card>
-
-      <ion-card class="stat-card">
-        <div class="icon-box success-box">
-          <ion-icon name="checkmark-done-circle"></ion-icon>
-        </div>
-        <h2 *ngIf="carregando">...</h2>
-        <h2 *ngIf="!carregando">{{ focosEliminados }}</h2>
-        <p>Focos Eliminados</p>
-      </ion-card>
-    </div>
-  </div>
 </ion-content>
