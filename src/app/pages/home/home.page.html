@@ -1,94 +1,66 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Mosquito na Mira</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding bg-light">
-  <div class="dashboard-container">
-    <h3 class="titulo-sessao">Painel Epidemiológico</h3>
+<ion-content class="app-bg">
+  <div class="menu-container">
     
-    <ion-grid fixed>
-      <ion-row>
-        <ion-col size="6">
-          <ion-card class="card-estatistica total-focos">
-            <ion-card-content>
-              <ion-icon name="alert-circle" size="large"></ion-icon>
-              <h2>{{ totalDenuncias }}</h2>
-              <p>Focos Denunciados</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+    <button class="menu-card full-width" routerLink="/dashboard">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      <span>Dashboard<br>da Dengue</span>
+    </button>
+    <div class="grid-2-col">
+      
+      <button class="menu-card" routerLink="/denunciar">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <span>Denunciar<br>Foco</span>
+      </button>
 
-        <ion-col size="6">
-          <ion-card class="card-estatistica zonas-alerta">
-            <ion-card-content>
-              <ion-icon name="map" size="large"></ion-icon>
-              <h2>{{ zonasRisco }}</h2>
-              <p>Zonas de Alerta</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+      <button class="menu-card" routerLink="/consultar-denuncia">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span>Consultar<br>Denúncia</span>
+      </button>
 
-  <div class="menu-container ion-padding-top">
-    <h3 class="titulo-sessao">Ações e Serviços</h3>
+      <button class="menu-card" routerLink="/postos-saude">
+        <ion-icon name="medkit-outline"></ion-icon>
+        <span>Postos de<br>Saúde</span>
+      </button>
 
-    <ion-grid fixed class="ion-no-padding">
-      <ion-row>
-        
-        <ion-col size="6" class="ion-padding-bottom ion-padding-end">
-          <ion-button expand="block" color="danger" class="botao-menu" routerLink="/denunciar">
-            <ion-icon name="megaphone" slot="top"></ion-icon>
-            Nova Denúncia
-          </ion-button>
-        </ion-col>
+      <button class="menu-card" routerLink="/mapa">
+        <ion-icon name="map-outline"></ion-icon>
+        <span>Mapa de<br>Focos</span>
+      </button>
 
-        <ion-col size="6" class="ion-padding-bottom ion-padding-start">
-          <ion-button expand="block" color="warning" class="botao-menu" routerLink="/consultar-denuncia">
-            <ion-icon name="search" slot="top"></ion-icon>
-            Consultar
-          </ion-button>
-        </ion-col>
+      <button class="menu-card" routerLink="/noticias">
+        <ion-icon name="newspaper-outline"></ion-icon>
+        <span>Notícias</span>
+      </button>
 
-        <ion-col size="6" class="ion-padding-bottom ion-padding-end">
-          <ion-button expand="block" color="primary" class="botao-menu" routerLink="/mapa">
-            <ion-icon name="map" slot="top"></ion-icon>
-            Mapa de Focos
-          </ion-button>
-        </ion-col>
+      <button class="menu-card" routerLink="/suporte">
+        <ion-icon name="help-circle-outline"></ion-icon>
+        <span>Suporte</span>
+      </button>
 
-        <ion-col size="6" class="ion-padding-bottom ion-padding-start">
-          <ion-button expand="block" color="success" class="botao-menu" routerLink="/chatbot">
-            <ion-icon name="hardware-chip" slot="top"></ion-icon>
-            Triagem (IA)
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="6" class="ion-padding-bottom ion-padding-end">
-          <ion-button expand="block" color="secondary" class="botao-menu" routerLink="/noticias">
-            <ion-icon name="newspaper" slot="top"></ion-icon>
-            Notícias
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="6" class="ion-padding-bottom ion-padding-start">
-          <ion-button expand="block" color="tertiary" class="botao-menu" routerLink="/postos-saude">
-            <ion-icon name="medical" slot="top"></ion-icon>
-            Postos de Saúde
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="12" class="ion-padding-bottom">
-          <ion-button expand="block" color="medium" class="botao-menu" routerLink="/suporte">
-            <ion-icon name="help-circle" slot="start"></ion-icon>
-            Suporte / Ajuda
-          </ion-button>
-        </ion-col>
-
-      </ion-row>
-    </ion-grid>
+      <!-- Botão do Agente ajustado para manter o mesmo design do seu grid -->
+      <button class="menu-card" *ngIf="isAgenteLogado" (click)="irParaGerenciamento()">
+        <ion-icon name="list-outline"></ion-icon>
+        <span>Gerenciar<br>Denúncias</span>
+      </button>
+      
+    </div>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border transparent-footer">
+  <div class="floating-nav">
+    <button class="nav-btn active" routerLink="/home">
+      <ion-icon name="home-outline"></ion-icon>
+    </button>
+    <button class="nav-btn">
+      <ion-icon name="menu-outline"></ion-icon>
+    </button>
+    <button class="nav-btn" routerLink="/chatbot">
+      <ion-icon name="headset-outline"></ion-icon>
+    </button>
+    
+    <button class="nav-btn" (click)="abrirMenuPerfil()">
+      <ion-icon name="person-outline"></ion-icon>
+    </button>
+  </div>
+</ion-footer>

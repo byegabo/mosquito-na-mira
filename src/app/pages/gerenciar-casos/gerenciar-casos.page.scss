@@ -1,0 +1,45 @@
+.app-bg {
+  --background: #F4F6F9 !important;
+}
+
+.caso-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+}
+
+.card-detalhes {
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.area-agente {
+  background: #eef5fc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #d0e1f9;
+}
+
+.input-agente {
+  --background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.mt-2 { margin-top: 10px; }
+.mt-3 { margin-top: 15px; }
+
+hr {
+  background: #eee;
+  margin: 10px 0;
+}
+
+.foto-denuncia {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 2px solid #ddd;
+}

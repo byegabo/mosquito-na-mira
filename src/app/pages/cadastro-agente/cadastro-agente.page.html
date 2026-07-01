@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Cadastro de Agente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cadastro-bg">
+  <div class="cadastro-container">
+    
+    <div class="form-container">
+      <h2 class="form-titulo">Criar Conta Funcional</h2>
+      <p class="form-subtitulo">Insira seus dados para acesso ao painel epidemiológico.</p>
+
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <ion-input class="input-box" type="text" placeholder="Nome do agente" [(ngModel)]="agente.nome"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>Matrícula / Registro Funcional</label>
+        <ion-input class="input-box" type="text" placeholder="Ex: AG-12345" [(ngModel)]="agente.matricula"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>E-mail Institucional</label>
+        <ion-input class="input-box" type="email" placeholder="nome@saude.gov.br" [(ngModel)]="agente.email"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>Senha de Acesso (Digite tudo junto, sem espaços)</label>
+        <ion-input class="input-box" type="password" placeholder="Mínimo 6 caracteres" [(ngModel)]="agente.senha"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>Confirmar Senha</label>
+        <ion-input class="input-box" type="password" placeholder="Repita a senha" [(ngModel)]="agente.confirmarSenha"></ion-input>
+      </div>
+
+      <ion-button expand="block" class="btn-cadastrar mt-4" (click)="cadastrarAgente()">
+        Concluir Cadastro
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

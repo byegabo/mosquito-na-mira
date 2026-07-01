@@ -1,0 +1,65 @@
+<ion-content class="login-bg">
+  <div class="login-container">
+    
+    <div class="logo-section">
+      <div class="logo-icon-box">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+      </div>
+      <h1>Mosquito na Mira</h1>
+      <p>Painel de Controle e Vigilância</p>
+    </div>
+
+    <div class="form-container">
+      
+      <ion-segment [(ngModel)]="tipoUsuario" class="segment-perfil" mode="ios">
+        <ion-segment-button value="cidadao">
+          <ion-label>Cidadão</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="agente">
+          <ion-label>Agente de Saúde</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="mt-3">
+        <div class="form-group">
+          <label>{{ tipoUsuario === 'agente' ? 'E-mail institucional' : 'E-mail ou CPF' }}</label>
+          <ion-input 
+            class="input-box" 
+            type="text" 
+            [placeholder]="tipoUsuario === 'agente' ? 'exemplo@saude.gov.br' : 'seu@email.com ou CPF'"
+            [(ngModel)]="credenciais.email">
+          </ion-input>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Senha de acesso</label>
+          <ion-input 
+            class="input-box" 
+            type="password" 
+            placeholder="••••••••"
+            [(ngModel)]="credenciais.senha">
+          </ion-input>
+        </div>
+      </div>
+
+      <div class="aux-links">
+        <p class="link-esqueceu" (click)="esqueceuSenha()">Esqueceu a senha?</p>
+      </div>
+
+      <ion-button expand="block" class="btn-entrar" (click)="realizarLogin()">
+        {{ tipoUsuario === 'agente' ? 'Acessar Painel' : 'Entrar' }}
+      </ion-button>
+
+      <div class="cadastro-link-container mt-3">
+        <p>Não possui acesso? <strong (click)="irParaCadastro()">Criar conta de {{ tipoUsuario === 'agente' ? 'Agente' : 'Cidadão' }}</strong></p>
+      </div>
+
+    </div>
+
+    <div class="login-footer">
+      <p *ngIf="tipoUsuario === 'agente'">Acesso restrito a servidores autorizados.</p>
+      <p *ngIf="tipoUsuario === 'cidadao'">Junte-se ao combate contra a Dengue.</p>
+    </div>
+
+  </div>
+</ion-content>

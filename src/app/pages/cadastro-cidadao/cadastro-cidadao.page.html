@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Cadastro do Cidadão</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cadastro-bg">
+  <div class="cadastro-container">
+    
+    <div class="form-container">
+      <h2 class="form-titulo">Criar Minha Conta</h2>
+      <p class="form-subtitulo">Acompanhe suas denúncias registradas e ajude a combater os focos.</p>
+
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <ion-input class="input-box" type="text" placeholder="Seu nome completo" [(ngModel)]="cidadao.nome"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>CPF</label>
+        <ion-input class="input-box" type="text" placeholder="000.000.000-00" [(ngModel)]="cidadao.cpf"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>E-mail</label>
+        <ion-input class="input-box" type="email" placeholder="seu.email@exemplo.com" [(ngModel)]="cidadao.email"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>Senha (Digite tudo junto, sem espaços)</label>
+        <ion-input class="input-box" type="password" placeholder="Mínimo 6 caracteres" [(ngModel)]="cidadao.senha"></ion-input>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>Confirmar Senha</label>
+        <ion-input class="input-box" type="password" placeholder="Repita a senha" [(ngModel)]="cidadao.confirmarSenha"></ion-input>
+      </div>
+
+      <ion-button expand="block" class="btn-cadastrar mt-4" (click)="cadastrarCidadao()">
+        Criar Conta
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

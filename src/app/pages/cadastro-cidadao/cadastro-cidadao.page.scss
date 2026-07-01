@@ -1,0 +1,79 @@
+.cadastro-bg {
+  --background: #F4F6F9 !important;
+  background: #F4F6F9 !important;
+}
+
+.cadastro-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  min-height: 100%;
+}
+
+.form-container {
+  background: #ffffff;
+  padding: 24px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  margin-top: 10px;
+}
+
+.form-titulo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #104C97;
+  margin: 0 0 8px 0;
+}
+
+.form-subtitulo {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+}
+
+.form-group {
+  margin-bottom: 12px;
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: #444444;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+}
+
+.input-box {
+  --background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #D1D5DB !important;
+  border-radius: 8px;
+  height: 44px;
+  font-size: 0.95rem;
+  --padding-start: 12px;
+  
+  &:focus-within {
+    border-color: #104C97 !important;
+  }
+}
+
+.btn-cadastrar {
+  --background: #104C97;
+  --color: #ffffff;
+  --border-radius: 8px;
+  --box-shadow: none;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: none;
+  margin: 20px 0 0 0;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}

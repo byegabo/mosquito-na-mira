@@ -8,22 +8,58 @@ datasource db {
 }
 
 model Denuncia {
-  id            String   @id @default(uuid())
-  protocolo     String   @unique
-  status        String   @default("Em Análise")
-  latitude      Float
-  longitude     Float
-  endereco      String
-  fotoUrl       String?  
-  dataCriacao   DateTime @default(now())
+  id             String   @id @default(uuid())
+  protocolo      String   @unique
+  status         String   @default("Em Análise")
+  
+  latitude       Float?
+  longitude      Float?
+  fotoUrl        String?  
+  
+  cep            String?
+  rua            String
+  numero         String?
+  bairro         String
+  municipio      String
+  complemento    String?
+  
+  descricao      String?
+  
+  anonimo        Boolean  @default(false)
+  cpf            String?
+  nome           String?
+  permiteContato Boolean  @default(false)
+  telefone       String?
+
+  observacoes    String?
+  
+  dataCriacao    DateTime @default(now())
 }
 
 model PostoSaude {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  endereco  String
-  horario   String
-  telefone  String
-  tipo      String
-  cor       String
+  id       Int    @id @default(autoincrement())
+  nome     String
+  endereco String
+  horario  String
+  telefone String
+  tipo     String
+  cor      String
+}
+
+model Cidadao {
+  id          String   @id @default(uuid())
+  nome        String
+  cpf         String   @unique
+  email       String   @unique
+  senha       String   // Lembre-se: O front-end já garante que a senha chega toda junta!
+  dataCriacao DateTime @default(now())
+}
+
+model Agente {
+  id          String   @id @default(uuid())
+  nome        String
+  matricula   String   @unique
+  email       String   @unique
+  senha       String
+  dataCriacao DateTime @default(now())
 }

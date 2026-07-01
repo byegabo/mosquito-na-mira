@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Gerenciar Casos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding app-bg">
+  
+  <ion-segment [(ngModel)]="filtroAtual" (ionChange)="aplicarFiltro()" class="ion-margin-bottom">
+    <ion-segment-button value="pendentes">
+      <ion-label>Pendentes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="resolvidos">
+      <ion-label>Resolvidos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-card *ngFor="let d of denunciasFiltradas" class="caso-card">
+    
+    <ion-card-header (click)="alternarCard(d.id)" style="cursor: pointer;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <ion-card-subtitle>Protocolo: {{ d.protocolo }}</ion-card-subtitle>
+        <ion-badge [color]="corDoStatus(d.status)">{{ d.status }}</ion-badge>
+      </div>
+      <ion-card-title style="font-size: 1.1rem; margin-top: 5px;">{{ d.bairro }}</ion-card-title>
+      <p style="color: #666; font-size: 0.85rem;">{{ d.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="denunciaExpandidaId === d.id" class="card-detalhes">
+      <hr>
+      <p><strong>Endereço:</strong> {{ d.rua }} <span *ngIf="d.numero">, {{ d.numero }}</span></p>
+      <p><strong>Descrição:</strong> {{ d.descricao || 'Nenhuma descrição fornecida.' }}</p>
+      
+      <p *ngIf="!d.anonimo && d.nome"><strong>Relatado por:</strong> {{ d.nome }} ({{ d.telefone }})</p>
+      
+      <div *ngIf="d.fotoUrl" class="ion-margin-vertical">
+        <p><strong>Evidência Fotográfica:</strong></p>
+        <img [src]="d.fotoUrl" alt="Foto da denúncia" class="foto-denuncia">
+      </div>
+
+      <div class="area-agente mt-3">
+        <ion-item class="input-agente">
+          <ion-select label="Atualizar Status" labelPlacement="floating" [(ngModel)]="d.status">
+            <ion-select-option value="Em Análise">Em Análise</ion-select-option>
+            <ion-select-option value="Em Andamento">Em Andamento</ion-select-option>
+            <ion-select-option value="Resolvido">Resolvido</ion-select-option>
+            <ion-select-option value="Falso Alarme">Falso Alarme</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="input-agente mt-2">
+          <ion-textarea 
+            label="Comentários da Vistoria" 
+            labelPlacement="floating" 
+            placeholder="Anote detalhes da ação realizada..." 
+            [(ngModel)]="d.observacoes" 
+            [autoGrow]="true">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-button expand="block" class="mt-3" (click)="salvarAlteracoes(d)">
+          Salvar Alterações
+        </ion-button>
+      </div>
+    </ion-card-content>
+
+  </ion-card>
+
+  <div *ngIf="denunciasFiltradas.length === 0" class="ion-text-center ion-margin-top" style="color: #888;">
+    <p>Nenhuma denúncia encontrada para este filtro.</p>
+  </div>
+
+</ion-content>

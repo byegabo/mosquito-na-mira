@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Geolocation } from '@capacitor/geolocation';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { addIcons } from 'ionicons';
+import { locationOutline, cameraOutline, imageOutline } from 'ionicons/icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-denunciar',
@@ -14,55 +17,100 @@ import { Camera, CameraResultType } from '@capacitor/camera';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class DenunciarPage implements OnInit {
-  endereco: string = '';
-  latitude: number = 0;
-  longitude: number = 0; 
-  fotoUrl: string = 'https://via.placeholder.com/150';
+  
+  protocoloRecebido: string = '';
 
-  constructor(private http: HttpClient) {}
+  form = {
+    cep: '',
+    rua: '',
+    numero: '',
+    bairro: '',
+    municipio: '',
+    complemento: '',
+    descricao: '',
+    anonimo: false,
+    cpf: '',
+    nome: '',
+    permiteContato: false,
+    telefone: '',
+    latitude: 0,
+    longitude: 0,
+    fotoUrl: ''
+  };
 
-  async ngOnInit() {
-    await this.capturarLocalizacao();
+  cameraSource = CameraSource;
+
+  constructor(private http: HttpClient, private router: Router) {
+    addIcons({ locationOutline, cameraOutline, imageOutline });
   }
 
-  async capturarLocalizacao() {
+  ngOnInit() {
+  }
+
+  async pegarLocalizacao() {
     try {
       const coordinates = await Geolocation.getCurrentPosition();
-      this.latitude = coordinates.coords.latitude;
-      this.longitude = coordinates.coords.longitude;
-      console.log('GPS capturado com sucesso!', this.latitude, this.longitude);
+      this.form.latitude = coordinates.coords.latitude;
+      this.form.longitude = coordinates.coords.longitude;
+      console.log('GPS capturado com sucesso!', this.form.latitude, this.form.longitude);
+      alert('Localização capturada com sucesso!');
     } catch (e) {
       console.error('Erro ao pegar o GPS:', e);
       alert('Não conseguimos capturar seu GPS. Verifique se a localização está ativada.');
     }
   }
 
-  async tirarFoto() {
-  const image = await Camera.getPhoto({
-    quality: 90,
-    allowEditing: true,
-    resultType: CameraResultType.DataUrl 
-  });
-  this.fotoUrl = image.dataUrl!;
-}
+  async tirarFoto(origem: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: origem 
+      });
+      
+      this.form.fotoUrl = image.dataUrl!;
+      alert('Foto anexada com sucesso!');
+    } catch (error) {
+      console.log('Captura de foto cancelada ou com erro', error);
+    }
+  }
 
-  enviarDenuncia() {
-    const dadosParaEnviar = {
-      endereco: this.endereco,
-      latitude: this.latitude,
-      longitude: this.longitude,
-      fotoUrl: this.fotoUrl
-    };
+  verificarAnonimato() {
+    if (this.form.anonimo) {
+      this.form.nome = '';
+      this.form.cpf = '';
+    }
+  }
 
-    this.http.post('http://localhost:3000/denuncias', dadosParaEnviar).subscribe({
+  enviar() {
+    if (!this.form.rua || !this.form.bairro || !this.form.municipio) {
+      alert('Por favor, preencha a Rua, Bairro e Município antes de enviar.');
+      return;
+    }
+
+    this.http.post('http://localhost:3000/denuncias', this.form).subscribe({
       next: (resposta: any) => {
-        alert(`Denúncia enviada com sucesso! Guarde seu protocolo: ${resposta.protocolo}`);
-        this.endereco = '';
+        this.protocoloRecebido = resposta.protocolo;
+        this.limparFormulario();
       },
       error: (erro) => {
         console.error(erro);
         alert('Erro ao conectar com o servidor.');
       }
     });
+  }
+
+  voltarInicio() {
+    this.protocoloRecebido = '';
+    this.router.navigate(['/home']);
+  }
+
+  limparFormulario() {
+    this.form = {
+      cep: '', rua: '', numero: '', bairro: '', municipio: '', complemento: '',
+      descricao: '', anonimo: false, cpf: '', nome: '', permiteContato: false,
+      telefone: '', latitude: 0, longitude: 0, fotoUrl: ''
+    };
   }
 }

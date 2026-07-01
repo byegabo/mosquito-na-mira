@@ -1,34 +1,116 @@
-<ion-header>
-  <ion-toolbar color="danger">
-    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
-    <ion-title>Nova Denúncia</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="header-azul">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Denunciar Foco da Dengue</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="ion-text-center ion-margin-bottom">
-    <img [src]="fotoUrl" style="border-radius: 10px; max-height: 150px;" alt="Foto do foco">
-    <ion-button (click)="tirarFoto()">Tirar Foto</ion-button>
+
+  <div *ngIf="!protocoloRecebido">
+    
+    <ion-button expand="block" class="btn-localizacao" (click)="pegarLocalizacao()">
+      <ion-icon name="location-outline" slot="start"></ion-icon>
+      Use sua localização atual
+    </ion-button>
+
+    <div class="form-group mt-3">
+      <label>CEP</label>
+      <ion-input class="input-box" type="text" [(ngModel)]="form.cep"></ion-input>
+    </div>
+
+    <ion-row>
+      <ion-col size="8" class="ion-no-padding pr-2">
+        <div class="form-group">
+          <label>Rua <span class="obrigatorio">*</span></label>
+          <ion-input class="input-box" type="text" [(ngModel)]="form.rua"></ion-input>
+        </div>
+      </ion-col>
+      <ion-col size="4" class="ion-no-padding">
+        <div class="form-group">
+          <label>Nº</label>
+          <ion-input class="input-box" type="text" [(ngModel)]="form.numero"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="form-group">
+      <label>Bairro <span class="obrigatorio">*</span></label>
+      <ion-input class="input-box" type="text" [(ngModel)]="form.bairro"></ion-input>
+    </div>
+
+    <div class="form-group">
+      <label>Município <span class="obrigatorio">*</span></label>
+      <ion-input class="input-box" type="text" [(ngModel)]="form.municipio"></ion-input>
+    </div>
+
+    <div class="form-group">
+      <label>Complemento</label>
+      <ion-input class="input-box" type="text" [(ngModel)]="form.complemento"></ion-input>
+    </div>
+
+    <div class="form-group mt-2">
+      <label>Adicione fotos do foco</label>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="block" fill="outline" class="btn-foto" color="dark" (click)="tirarFoto(cameraSource.Camera)">
+              <ion-icon name="camera-outline" slot="start"></ion-icon>
+              Tirar foto
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" fill="outline" class="btn-foto" color="dark" (click)="tirarFoto(cameraSource.Photos)">
+              <ion-icon name="image-outline" slot="start"></ion-icon>
+              Escolher
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="form-group mt-2">
+      <label>Descreva o local ou a situação</label>
+      <ion-textarea class="input-box textarea-box" rows="3" [(ngModel)]="form.descricao"></ion-textarea>
+    </div>
+
+    <h3 class="titulo-contato">Informe seus dados para contato</h3>
+
+    <div class="checkbox-group">
+      <ion-checkbox mode="md" [(ngModel)]="form.anonimo" (ionChange)="verificarAnonimato()"></ion-checkbox>
+      <label>Permanecer em anônimo</label>
+    </div>
+
+    <div class="form-group">
+      <label>CPF</label>
+      <ion-input class="input-box" type="text" [(ngModel)]="form.cpf" [disabled]="form.anonimo"></ion-input>
+    </div>
+
+    <div class="form-group">
+      <label>Nome</label>
+      <ion-input class="input-box" type="text" [(ngModel)]="form.nome" [disabled]="form.anonimo"></ion-input>
+    </div>
+
+    <div class="checkbox-group mt-2">
+      <ion-checkbox mode="md" [(ngModel)]="form.permiteContato"></ion-checkbox>
+      <label class="label-multiline">Permito ser contatado pela equipe de vigilância</label>
+    </div>
+
+    <div class="form-group">
+      <label>Telefone/WhatsApp</label>
+      <ion-input class="input-box" type="tel" [(ngModel)]="form.telefone"></ion-input>
+    </div>
+
+    <ion-button expand="block" class="btn-enviar" (click)="enviar()">
+      Enviar denúncia
+    </ion-button>
+
+  </div> <div *ngIf="protocoloRecebido" class="tela-sucesso">
+    <h1 class="sucesso-titulo">Denúncia registrada<br>com sucesso</h1>
+    <p class="sucesso-protocolo">Protocolo #{{ protocoloRecebido }}</p>
+    <p class="voltar-btn" (click)="voltarInicio()">Voltar ao menu principal</p>
   </div>
 
-  <ion-item class="ion-margin-bottom">
-    <ion-textarea 
-      label="Endereço ou Ponto de Referência" 
-      labelPlacement="floating" 
-      placeholder="Ex: Terreno baldio ao lado do número 150, Centro - Palhoça" 
-      [(ngModel)]="endereco"
-      rows="3">
-    </ion-textarea>
-  </ion-item>
-
-  <ion-card color="light" class="ion-no-margin ion-margin-bottom">
-    <ion-card-content>
-      <ion-icon name="location" color="danger"></ion-icon>
-      <strong> Localização via GPS:</strong> Coordenadas capturadas automaticamente.
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button expand="block" color="danger" (click)="enviarDenuncia()">
-    Enviar Denúncia Real
-  </ion-button>
 </ion-content>

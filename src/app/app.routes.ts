@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -38,4 +38,28 @@ export const routes: Routes = [
     path: 'chatbot',
     loadComponent: () => import('./pages/chatbot/chatbot.page').then( m => m.ChatbotPage)
   },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./pages/dashboard/dashboard.page').then( m => m.DashboardPage)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+  },
+  {
+    path: 'cadastro-cidadao',
+    loadComponent: () => import('./pages/cadastro-cidadao/cadastro-cidadao.page').then( m => m.CadastroCidadaoPage)
+  },
+  {
+    path: 'cadastro-agente',
+    loadComponent: () => import('./pages/cadastro-agente/cadastro-agente.page').then( m => m.CadastroAgentePage)
+  },
+  {
+    path: 'gerenciar-casos',
+    loadComponent: () => import('./pages/gerenciar-casos/gerenciar-casos.page').then( m => m.GerenciarCasosPage)
+  },
+  {
+    path: 'cadastro-agente',
+    loadComponent: () => import('./pages/cadastro-agente/cadastro-agente.page').then( m => m.CadastroAgentePage)
+  }
 ];

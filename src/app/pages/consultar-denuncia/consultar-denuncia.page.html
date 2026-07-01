@@ -20,8 +20,10 @@
       <ion-card-title color="warning">{{ resultado.status }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Data:</strong> {{ resultado.data }}</p>
-      <p><strong>Local:</strong> {{ resultado.endereco }}</p>
+      
+      <p><strong>Data:</strong> {{ resultado.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <p><strong>Local:</strong> {{ resultado.rua }}<span *ngIf="resultado.numero">, {{ resultado.numero }}</span> - {{ resultado.bairro }}</p>
+      
       <p class="ion-margin-top">Uma equipe de agentes de saúde fará a vistoria no local em breve.</p>
     </ion-card-content>
   </ion-card>
